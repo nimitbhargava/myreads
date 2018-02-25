@@ -27,13 +27,18 @@ class BooksApp extends React.Component {
     changeBookShelf = (book, newShelf) => {
         /* save to server */
         BooksAPI.update(book, newShelf).then((result) => {
-            /* save to current state */
-            const changedBooks = this.state.books.map(element => {
-                if (element.id === book.id) {
-                    element.shelf = newShelf
-                }
-                return element
-            })
+            let changedBooks = [];
+            if (this.state.books.filter(present_book => present_book.id === book.id).length) {
+                changedBooks = this.state.books.map(element => {
+                    if (element.id === book.id) {
+                        element.shelf = newShelf
+                    }
+                    return element
+                })
+            } else {
+                book.shelf = newShelf
+                changedBooks = this.state.books.concat([book])
+            }
             this.setState({books: changedBooks})
         })
     }
