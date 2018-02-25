@@ -7,7 +7,7 @@ function BooksGrid(props) {
         <ol className="books-grid">
             {props.books.length > 0 && (
                 props.books.map((book, index) => (
-                    <Book book={book} key={index}/>
+                    <Book book={book} key={index} changeBookShelf={props.changeBookShelf}/>
                 ))
             )}
         </ol>
@@ -15,6 +15,7 @@ function BooksGrid(props) {
 }
 
 BooksGrid.propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    changeBookShelf: PropTypes.func.isRequired
 }
 export default BooksGrid
