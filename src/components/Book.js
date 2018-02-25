@@ -14,7 +14,7 @@ function Book(props) {
                         height: 193,
                         backgroundImage: `url(${book.imageLinks.smallThumbnail})`
                     }}/>
-                    <BookShelfChanger changeBookShelf={props.changeBookShelf}/>
+                    <BookShelfChanger book={book} changeBookShelf={props.changeBookShelf}/>
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors}</div>

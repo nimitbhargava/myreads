@@ -18,13 +18,28 @@ class BooksApp extends React.Component {
     state = {
         books: []
     }
-
-    changeBookShelf = (newValue) => {
-        console.log(newValue)
+    /*
+      @description change the shelf of a book
+      on the server and in the current state
+      @param {object} book - The book to change
+      @param {string} newShelf - The new Shelf to store the book in
+    */
+    changeBookShelf = (book, newShelf) => {
+        /* save to server */
+        BooksAPI.update(book, newShelf).then((result) => {
+            /* save to current state */
+            const changedBooks = this.state.books.map(element => {
+                if (element.id === book.id) {
+                    element.shelf = newShelf
+                }
+                return element
+            })
+            this.setState({books: changedBooks})
+        })
     }
 
     render() {
-        const { books } = this.state
+        const {books} = this.state
         return (
             <div className="app">
                 <Route exact path="/search" render={() => (
@@ -38,12 +53,12 @@ class BooksApp extends React.Component {
                         </div>
                         <div className="list-books-content">
                             <div>
-                                <BookShelf books={books.filter(book => book.shelf === 'currentlyReading')} changeBookShelf={this.changeBookShelf}
-                                           title="Currently Reading"/>
-                                <BookShelf books={books.filter(book => book.shelf === 'wantToRead')} changeBookShelf={this.changeBookShelf}
-                                           title="Want to Read"/>
-                                <BookShelf books={books.filter(book => book.shelf === 'read')} changeBookShelf={this.changeBookShelf}
-                                           title="Read"/>
+                                <BookShelf books={books.filter(book => book.shelf === 'currentlyReading')}
+                                           changeBookShelf={this.changeBookShelf} title="Currently Reading"/>
+                                <BookShelf books={books.filter(book => book.shelf === 'wantToRead')}
+                                           changeBookShelf={this.changeBookShelf} title="Want to Read"/>
+                                <BookShelf books={books.filter(book => book.shelf === 'read')}
+                                           changeBookShelf={this.changeBookShelf} title="Read"/>
                             </div>
                         </div>
                         <div className="open-search">
