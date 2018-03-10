@@ -12,7 +12,7 @@ function Book(props) {
                     <div className="book-cover" style={{
                         width: 128,
                         height: 193,
-                        backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                        backgroundImage: `url(${book.imageLinks && book.imageLinks.smallThumbnail ? `${book.imageLinks.smallThumbnail}` : `http://via.placeholder.com/128x193?text=No%20Cover`})`
                     }}/>
                     <BookShelfChanger book={book} changeBookShelf={props.changeBookShelf}/>
                 </div>
