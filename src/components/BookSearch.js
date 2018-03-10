@@ -23,7 +23,9 @@ class BookSearch extends React.Component {
         BooksAPI.search(query).then((response) => {
             if (Array.isArray(response)) {
                 this.setState({searchResults: response})
+                return
             }
+            this.setState({searchResults: []})
         })
     }
 
