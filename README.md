@@ -1,5 +1,12 @@
 # MyReads Project
 
+This project is one of the deliverable for the React Nanodegree program by Udacity. In this project a user can -
+
+1. Search books
+2. Add books from search
+3. Have books in different reading shelves
+4. Move books between shelves
+
 ## TL;DR
 
 To get started developing right away:
