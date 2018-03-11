@@ -22,9 +22,13 @@ class BookSearch extends React.Component {
         }
         BooksAPI.search(query).then((response) => {
             if (Array.isArray(response)) {
+                response = response.map(function (book) {
+                    book.shelf = 'none'
+                    return book
+                })
                 response = response.map(book => {
-                    return Object.assign({}, book, this.props.books.find(shelfData => shelfData.id === book.id));
-                });
+                    return Object.assign({}, book, this.props.books.find(shelfData => shelfData.id === book.id))
+                })
                 this.setState({searchResults: response})
                 return
             }
